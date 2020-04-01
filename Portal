@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Portal : MonoBehaviour
+{
+    private Transform destination;
+    public bool isOrange;
+    public float distance = 0.3f;
+    private Transform player;
+    void Start()
+    {
+        
+        if(isOrange == false)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            destination = GameObject.FindGameObjectWithTag("OrangePortal").GetComponent<Transform>();
+        }
+        else
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            destination = GameObject.FindGameObjectWithTag("BluePortal").GetComponent<Transform>();
+        }
+        
+    }
+
+    
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.tag =="Player"){
+        if(Vector2.Distance(transform.position, other.transform.position) > distance)
+        {
+            other.transform.position = new Vector2(destination.position.x,destination.position.y);
+        }
+        }
+        
+    
+}
+}
